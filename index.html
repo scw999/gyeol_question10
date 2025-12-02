@@ -377,81 +377,48 @@
         
         /* 매칭 리스트 (새로운 카드형 UI) */
         .match-card {
-            background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            display: flex; flex-direction: column; gap: 12px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative; overflow: hidden;
+            background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px;
+            border-left: 4px solid transparent;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            display: flex; flex-direction: column; gap: 8px;
+            transition: transform 0.2s ease;
         }
-        .match-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.05); }
+        .match-card:hover { transform: translateY(-2px); }
         
-        /* 왼쪽 테두리 대신 상단 컬러 바 사용 */
-        .match-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-            background: currentColor; opacity: 0.8;
-        }
-        
-        .match-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .match-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
         .match-badge { 
-            font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; 
-            text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 4px;
+            font-size: 0.7rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; 
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .match-category { font-size: 0.75rem; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .match-question { font-size: 1rem; font-weight: 700; color: #1F2937; margin-bottom: 4px; line-height: 1.4; }
-        
-        /* 공통 답변 강조 박스 */
-        .match-answer-box {
-            background: #F9FAFB; border-radius: 12px; padding: 12px 16px;
-            display: flex; align-items: center; gap: 12px;
-            border: 1px solid #F3F4F6;
+        .match-card-q { font-size: 0.95rem; font-weight: 700; color: #1F2937; }
+        .match-card-a { 
+            background: #F9FAFB; padding: 10px; border-radius: 8px; 
+            font-size: 0.85rem; color: #4B5563; font-weight: 500;
+            display: flex; align-items: center; gap: 6px;
         }
-        .couple-icon { font-size: 1.5rem; min-width: 40px; text-align: center; }
-        .answer-text { 
-            font-size: 0.9rem; color: #374151; font-weight: 600; line-height: 1.4; 
-            display: flex; flex-direction: column;
-        }
-        .answer-label { font-size: 0.7rem; color: #9CA3AF; font-weight: 700; margin-bottom: 2px; }
-        
-        /* 분석 내용 (Benefit) */
-        .match-analysis {
-            background: #fff; border-radius: 12px; padding: 14px;
-            font-size: 0.85rem; color: #555; line-height: 1.6;
-            display: flex; align-items: flex-start; gap: 10px;
-            border: 1px dashed; /* 테두리 색상은 테마별로 적용 */
-        }
-        .analysis-icon { font-size: 1.1rem; margin-top: 2px; }
+        .match-card-a::before { content: 'A.'; color: #9CA3AF; font-weight: 700; }
 
-        /* --- 매칭 타입별 테마 (컬러/배경) --- */
+        /* 매칭 타입별 테마 */
+        /* 1. 상호 보완 (Crossover) - Pink/Orange */
+        .type-crossover { border-left-color: #E11D48; background: #FFF1F2; }
+        .type-crossover .match-badge { background: #FFE4E6; color: #BE123C; border: 1px solid #FDA4AF; }
+        .type-crossover .match-card-a { background: #fff; border: 1px solid #FECDD3; color: #9F1239; }
         
-        /* 1. 상호 보완 (Crossover) - Pink/Rose */
-        .type-crossover { color: #E11D48; } /* for top border */
-        .type-crossover .match-badge { background: #FFF1F2; color: #BE123C; border: 1px solid #FECDD3; }
-        .type-crossover .match-answer-box { background: #FFF1F2; border-color: #FECDD3; }
-        .type-crossover .answer-text { color: #9F1239; }
-        .type-crossover .match-analysis { background: #FFF; border-color: #FDA4AF; color: #881337; }
+        /* 2. 취향 일치 (Similarity) - Yellow/Blue */
+        .type-similarity { border-left-color: #F59E0B; background: #FFFBEB; }
+        .type-similarity .match-badge { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+        .type-similarity .match-card-a { background: #fff; border: 1px solid #FCD34D; color: #92400E; }
         
-        /* 2. 취향 일치 (Similarity) - Yellow/Amber */
-        .type-similarity { color: #D97706; }
-        .type-similarity .match-badge { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
-        .type-similarity .match-answer-box { background: #FFFBEB; border-color: #FDE68A; }
-        .type-similarity .answer-text { color: #92400E; }
-        .type-similarity .match-analysis { background: #FFF; border-color: #FCD34D; color: #78350F; }
+        /* 3. 동적 조화 (Dynamic) - Purple */
+        .type-dynamic { border-left-color: #7C3AED; background: #F5F3FF; }
+        .type-dynamic .match-badge { background: #EDE9FE; color: #6D28D9; border: 1px solid #DDD6FE; }
+        .type-dynamic .match-card-a { background: #fff; border: 1px solid #C4B5FD; color: #5B21B6; }
         
-        /* 3. 동적 조화 (Dynamic) - Violet */
-        .type-dynamic { color: #7C3AED; }
-        .type-dynamic .match-badge { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
-        .type-dynamic .match-answer-box { background: #F5F3FF; border-color: #DDD6FE; }
-        .type-dynamic .answer-text { color: #5B21B6; }
-        .type-dynamic .match-analysis { background: #FFF; border-color: #C4B5FD; color: #4C1D95; }
-        
-        /* 4. 가치관 (Preference) - Green/Emerald */
-        .type-preference { color: #059669; }
-        .type-preference .match-badge { background: #ECFDF5; color: #047857; border: 1px solid #6EE7B7; }
-        .type-preference .match-answer-box { background: #ECFDF5; border-color: #6EE7B7; }
-        .type-preference .answer-text { color: #065F46; }
-        .type-preference .match-analysis { background: #FFF; border-color: #6EE7B7; color: #064E3B; }
+        /* 4. 가치관 (Preference) - Green */
+        .type-preference { border-left-color: #059669; background: #ECFDF5; }
+        .type-preference .match-badge { background: #D1FAE5; color: #047857; border: 1px solid #6EE7B7; }
+        .type-preference .match-card-a { background: #fff; border: 1px solid #6EE7B7; color: #065F46; }
+
 
         /* 하단 고정 버튼 바 */
         .fixed-bottom-bar {
@@ -711,7 +678,7 @@
                 </div>
             </div>
              
-            <!-- 5. 심층 성향 일치도 분석 (New Card Layout - Redesigned) -->
+            <!-- 5. 심층 성향 일치도 분석 (New Card Layout) -->
             <div class="max-w-2xl mx-auto mb-12">
                 <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg relative overflow-hidden">
                     <!-- 데코레이션 -->
@@ -720,9 +687,9 @@
                     <h4 class="font-bold text-xl text-gray-800 mb-2 flex items-center justify-center">
                         <span class="mr-2">🔍</span> 심층 성향 일치도 분석 (Detailed Analysis)
                     </h4>
-                    <p class="text-center text-xs text-gray-400 mb-8 font-light">두 분이 완벽하게 통하는 지점들을 심리학적으로 분석했습니다.</p>
+                    <p class="text-center text-xs text-gray-400 mb-8 font-light">두 분의 답변을 분석하여 가장 잘 맞는 부분들을 시각화했습니다.</p>
                     
-                    <div id="integrated-match-list" class="flex flex-col gap-4">
+                    <div id="integrated-match-list" class="flex flex-col gap-3">
                         <!-- JS로 동적 생성 (Card UI) -->
                     </div>
                 </div>
@@ -772,8 +739,6 @@
         </div>
     </div>
 
-    <!-- 과학적 근거 모달, 가이드 모달 등 기존 모달 유지 -->
-    <!-- ... (Previous Modal Code) ... -->
     <!-- 과학적 근거 모달 -->
     <div id="science-modal" class="fixed inset-0 bg-black/50 hidden z-50 flex justify-center items-center p-4">
         <div class="bg-white rounded-2xl w-full max-w-2xl modal-content shadow-2xl transform transition-all scale-95 opacity-0" id="science-modal-panel">
@@ -1025,8 +990,8 @@
     </div>
 
     <script>
-        // ... (existing JS: questions data, helper functions) ...
-         function getSectionHeaderHTML(section, desc) {
+        // ... (getSectionHeaderHTML, getBadgeHTML same as before) ...
+        function getSectionHeaderHTML(section, desc) {
             let icon = '', title = '', sub = '';
             if (section === 'Reptilian') { icon = '🦎'; title = 'Part 1. 본능 & 에너지 (Reptilian)'; sub = '생존 습관과 에너지 레벨'; }
             else if (section === 'Limbic') { icon = '❤️'; title = 'Part 2. 감정 & 애착 (Limbic)'; sub = '사랑, 갈등 해결, 그리고 정서적 유대'; }
@@ -1043,58 +1008,50 @@
 
         /* --- 데이터 (질문 리스트 - Big5 & 애착 반영) --- */
         const questions = [
-            /* --- STEP 1. Reptilian Brain (본능/생존/에너지) --- */
-            // ... (24 Questions remain same as before) ...
-            // 1. 수면
+             // ... (Same 24 Questions data as previous version) ...
+             /* --- STEP 1. Reptilian Brain (본능/생존/에너지) --- */
             { id: 'q_sleep', section: 'Reptilian', category: '생존 습관', type: 'similarity', text: '당신의 잠자리 예민도는?', options: [ 
                 { value: '1', text: '(예민) 작은 소리나 빛에도 쉽게 깨는 예민한 편이다.', tag: '#신경증'}, 
                 { value: '2', text: '(보통) 적당한 생활 소음이나 빛은 신경 쓰지 않는 편이다.', tag: '#정서안정'}, 
                 { value: '3', text: '(유연) 환경이 바뀌어도 적응하려고 노력하는 편이다.', tag: '#개방성'}, 
                 { value: '4', text: '(둔감) 머리만 대면 잠들 정도로 수면 환경에 무던한 편이다.', tag: '#정서안정'} 
             ]},
-            // 2. 생활리듬
             { id: 'q_rhythm', section: 'Reptilian', category: '생존 습관', type: 'similarity', text: '선호하는 기상/취침 시간은?', options: [ 
                 { value: '1', text: '(아침형) 일찍 자고 일찍 일어나는 아침형 생활을 선호한다.', tag: '#성실성'}, 
                 { value: '2', text: '(저녁형) 늦게 자고 늦게 일어나는 저녁형 생활이 편하다.', tag: '#개방성'}, 
                 { value: '3', text: '(맞춤형) 상대방이나 상황에 따라 리듬을 맞출 수 있다.', tag: '#우호성'}, 
                 { value: '4', text: '(불규칙) 정해진 시간 없이 상황에 따라 유동적으로 자는 편이다.', tag: '#개방성'} 
             ]},
-            // 3. 위생 (Dynamic)
             { id: 'q_hygiene', section: 'Reptilian', category: '생존 습관', type: 'dynamic', text: '방바닥에 머리카락이 떨어져 있다면?', options: [ 
                 { value: '1', text: '(즉시) 보이는 즉시 치워야 직성이 풀리는 성격이다.', tag: '#성실성', followup: { text: '배우자가 어지르면?', options: [{ value: '1', text: '잔소리 폭격' }, { value: '2', text: '따라다니며 치움' }, { value: '3', text: '포기함' }] } }, 
                 { value: '2', text: '(루틴) 정해진 시간에 규칙적으로 청소하는 것을 좋아한다.', tag: '#성실성', followup: { text: '청소를 못했다면?', options: [{ value: '1', text: '스트레스 받음' }, { value: '2', text: '내일 몰아서 함' }, { value: '3', text: '괜찮음' }] } }, 
                 { value: '3', text: '(융통) 평소엔 적당히 하고 주말에 몰아서 하는 편이다.', tag: '#개방성', followup: { text: '배우자가 깔끔하면?', options: [{ value: '1', text: '맞추려고 노력' }, { value: '2', text: '피곤함' }, { value: '3', text: '알아서 하라고 둠' }] } }, 
                 { value: '4', text: '(방임) 생활에 지장 없으면 크게 신경 안 쓰는 편이다.', tag: '#정서안정', followup: { text: '집이 엉망이라면?', options: [{ value: '1', text: '언젠간 치우겠지' }, { value: '2', text: '도우미 부름' }, { value: '3', text: '불편하지 않음' }] } } 
             ]},
-            // 4. 식성
             { id: 'q_food', section: 'Reptilian', category: '생존 습관', type: 'similarity', text: '데이트 맛집을 고를 때 당신은?', options: [ 
                 { value: '1', text: '(모험) 새로운 음식이나 이색적인 맛집 탐방을 즐기는 편이다.', tag: '#개방성'}, 
                 { value: '2', text: '(안전) 익숙하고 맛이 보장된 단골집이나 검증된 곳을 선호한다.', tag: '#성실성'}, 
                 { value: '3', text: '(조화) 종류를 가리지 않고 그날의 기분에 따라 즐기는 편이다.', tag: '#우호성'}, 
                 { value: '4', text: '(배려) 특별히 가리는 것 없이 상대방의 선택을 따르는 편이다.', tag: '#우호성'} 
             ]},
-            // 5. 충전
             { id: 'q_charge', section: 'Reptilian', category: '에너지', type: 'similarity', text: '지친 하루 끝, 나만의 충전 방식은?', options: [ 
                 { value: '1', text: '(내향) 집에서 혼자만의 시간을 가지며 에너지를 채우는 편이다.', tag: '#정서안정'}, 
                 { value: '2', text: '(외향) 사람들을 만나 이야기를 나누며 스트레스를 푸는 편이다.', tag: '#외향성'}, 
                 { value: '3', text: '(공존) 같은 공간에서 각자 할 일을 하며 쉬는 것을 좋아한다.', tag: '#애착안정'}, 
                 { value: '4', text: '(활동) 운동이나 활동적인 취미로 에너지를 발산하는 편이다.', tag: '#외향성'} 
             ]},
-            // 6. 주말
             { id: 'q_weekend', section: 'Reptilian', category: '에너지', type: 'similarity', text: '이상적인 주말 데이트 스타일은?', options: [ 
                 { value: '1', text: '(활동) 핫플레이스나 근교 여행 등 밖으로 나가는 것을 좋아한다.', tag: '#외향성'}, 
                 { value: '2', text: '(휴식) 집에서 맛있는 것을 먹으며 푹 쉬는 것을 선호한다.', tag: '#정서안정'}, 
-                { value: '3', text: '(밸런스) 하루는 외출하고 하루는 휴식하며 균형을 맞추는 편이다.', tag: '#성실성'}, 
+                { value: '3', text: '(밸런스) 하루는 외출하고 하루는 휴식하며 균형을 맞춘다.', tag: '#성실성'}, 
                 { value: '4', text: '(개인) 각자의 취미 생활을 존중하며 따로 또 같이 보내는 편이다.', tag: '#개방성'} 
             ]},
-            // 7. 계획
             { id: 'q_plan', section: 'Reptilian', category: '생활 패턴', type: 'similarity', text: '여행 계획을 짤 때 당신은?', options: [ 
                 { value: '1', text: '(계획 J) 동선과 시간을 꼼꼼하게 계획하여 움직이는 편이다.', tag: '#성실성'}, 
                 { value: '2', text: '(유동 J) 큰 틀은 짜되 세부 일정은 상황에 따라 조율하는 편이다.', tag: '#성실성'}, 
                 { value: '3', text: '(즉흥 P) 발길 닿는 대로 자유롭게 다니는 즉흥 여행을 즐긴다.', tag: '#개방성'}, 
                 { value: '4', text: '(위임) 계획하기보다 상대방이 이끄는 대로 따르는 게 편하다.', tag: '#우호성'} 
             ]},
-            // 8. 사교
             { id: 'q_social_limit', section: 'Reptilian', category: '관계 가치관', type: 'preference', text: '연인의 이성 친구(남사친/여사친), 어디까지 허용?', options: [ 
                 { value: '1', text: '(불가) 이성 친구와 단둘이 만나는 것은 절대 이해할 수 없다.', tag: '#애착불안'}, 
                 { value: '2', text: '(조건부) 내가 아는 사람이거나 여럿이 만나는 건 괜찮다고 생각한다.', tag: '#성실성'}, 
@@ -1102,63 +1059,54 @@
                 { value: '4', text: '(방임) 각자의 사생활과 인간관계를 존중하고 관여하지 않는다.', tag: '#애착회피'} 
             ]},
             /* --- STEP 2. Limbic System (감정/애착/갈등) --- */
-            // 9. 연락
             { id: 'q_contact_style', section: 'Limbic', category: '애착 유형', type: 'crossover', text_me: '나의 연락 스타일은?', text_partner: '상대방에게 바라는 연락 빈도는?', options: [ 
                 { value: '1', text: '(밀착) 일상을 실시간으로 공유하고 자주 연락하기를 원한다.', tag: '#애착불안'}, 
                 { value: '2', text: '(루틴) 출퇴근이나 식사 등 주요 시점에는 꼭 연락하는 편이다.', tag: '#성실성'}, 
                 { value: '3', text: '(용건) 특별한 용건이 있거나 자기 전에만 통화하면 충분하다.', tag: '#애착회피'}, 
                 { value: '4', text: '(자유) 서로 부담 없이 편할 때 연락하는 걸 선호한다.', tag: '#애착안정'} 
             ]},
-            // 10. 부재 (Dynamic)
             { id: 'q_absence', section: 'Limbic', category: '애착 반응', type: 'dynamic', text: '연인이 3시간째 연락 두절이다. 당신의 반응은?', options: [ 
                 { value: '1', text: '(안정) 무슨 일이 생긴 건 아닌지 걱정하며 기다리는 편이다.', tag: '#애착안정', followup: { text: '나중에 연락이 오면?', options: [{ value: '1', text: '별일 없었어?' }, { value: '2', text: '걱정했잖아' }, { value: '3', text: '다음엔 미리 말해줘' }] } }, 
                 { value: '2', text: '(불안) 연락이 올 때까지 불안해하며 수시로 핸드폰을 확인한다.', tag: '#애착불안', followup: { text: '계속 연락이 없으면?', options: [{ value: '1', text: '전화 계속 함' }, { value: '2', text: '카톡 폭탄' }, { value: '3', text: '찾아감' }] } }, 
                 { value: '3', text: '(이성) 메시지를 하나 남겨두고 내 할 일에 집중하는 편이다.', tag: '#애착회피', followup: { text: '이유가 타당하다면?', options: [{ value: '1', text: '쿨하게 넘어감' }, { value: '2', text: '그래도 연락은 해야지' }, { value: '3', text: '알겠어' }] } }, 
                 { value: '4', text: '(회피) 연락이 올 때까지 나도 먼저 연락하지 않는 편이다.', tag: '#애착회피', followup: { text: '상대가 사과하면?', options: [{ value: '1', text: '바로 품' }, { value: '2', text: '시간이 필요함' }, { value: '3', text: '무시함' }] } } 
             ]},
-            // 11. 표현 (Modified with text_partner for Active nuance)
             { id: 'q_expression', section: 'Limbic', category: '사랑의 언어', type: 'crossover', text_me: '내가 사랑받는다고 느끼는 순간은?', text_partner: '연인에게 주로 해주는 표현 방식은?', options: [ 
                 { value: '1', text: '(인정) 따뜻한 말 한마디와 구체적인 칭찬을 들을 때 행복하다.', text_partner: '(인정) 따뜻한 말 한마디와 구체적인 칭찬을 자주 해주는 편이다.', tag: '#우호성'}, 
                 { value: '2', text: '(봉사) 나를 위해 귀찮음을 감수하고 챙겨줄 때 감동한다.', text_partner: '(봉사) 연인을 위해 귀찮음을 감수하고 세심하게 챙겨주는 편이다.', tag: '#성실성'}, 
                 { value: '3', text: '(함께) 눈을 맞추고 온전히 둘만의 시간을 보낼 때 충만하다.', text_partner: '(함께) 눈을 맞추고 온전히 둘만의 시간을 보내는 데 집중한다.', tag: '#애착안정'}, 
                 { value: '4', text: '(스킨십) 손잡기, 포옹 등 따뜻한 체온이 닿을 때 안정된다.', text_partner: '(스킨십) 먼저 손을 잡거나 안아주며 따뜻한 체온을 나누는 편이다.', tag: '#외향성'} 
             ]},
-            // 12. 공감
             { id: 'q_empathy', section: 'Limbic', category: '정서 지지', type: 'crossover', text_me: '힘들 때 받고 싶은 위로는?', text_partner: '연인이 힘들 때 나의 반응은?', options: [ 
                 { value: '1', text: '(감정) 감정적으로 깊이 공감해주고 따뜻하게 위로해주길 바란다.', text_partner: '(감정) 감정적으로 깊이 공감하며 따뜻하게 위로해주는 편이다.', tag: '#우호성'}, 
                 { value: '2', text: '(해결) 문제 해결을 위한 현실적이고 구체적인 조언을 해주길 바란다.', text_partner: '(해결) 문제 해결을 위한 현실적인 해결책을 제시하는 편이다.', tag: '#성실성'}, 
                 { value: '3', text: '(경청) 내 이야기를 끊지 않고 끝까지 들어주기를 바란다.', text_partner: '(경청) 상대의 이야기를 끝까지 경청하고 원할 때 조언한다.', tag: '#애착안정'}, 
                 { value: '4', text: '(지지) 말없이 곁에 있어주거나 기분 전환을 도와주길 바란다.', text_partner: '(지지) 묵묵히 곁을 지켜주거나 기분 전환을 돕는 편이다.', tag: '#우호성'} 
             ]},
-            // 13. 감정 -> 싸움 스타일
             { id: 'q_anger', section: 'Limbic', category: '싸움 스타일', type: 'similarity', text: '연인과 의견 충돌이 있을 때, 주로 어떤 모습으로 싸우나요?', options: [ 
                 { value: '1', text: '(표출) 할 말은 해야 한다. 그 자리에서 불만을 바로 이야기한다.', tag: '#외향성'}, 
                 { value: '2', text: '(진정) 감정이 격해지면 실수가 생길까 봐 잠시 대화를 멈춘다.', tag: '#정서안정'}, 
                 { value: '3', text: '(논리) 감정적인 호소보다는 시시비비를 논리적으로 따지는 편이다.', tag: '#성실성'}, 
                 { value: '4', text: '(회피) 싸우는 상황 자체가 싫어서 입을 다물거나 자리를 피한다.', tag: '#애착회피'} 
             ]},
-            // 14. 화해 (New)
             { id: 'q_reconciliation', section: 'Limbic', category: '화해 방식', type: 'dynamic', text: '싸움 후 냉전 상태를 끝내고 싶을 때, 당신의 화해 방식은?', options: [ 
                 { value: '1', text: '(직면) "우리 얘기 좀 해"라며 먼저 대화를 시도한다.', tag: '#애착안정', followup: { text: '상대가 거부하면?', options: [{ value: '1', text: '기다린다' }, { value: '2', text: '답답하다' }, { value: '3', text: '더 화낸다' }] } }, 
                 { value: '2', text: '(유화) 애교를 부리거나 슬쩍 장난을 치며 분위기를 푼다.', tag: '#우호성', followup: { text: '상대가 정색하면?', options: [{ value: '1', text: '무안하다' }, { value: '2', text: '상처받는다' }, { value: '3', text: '그만둔다' }] } }, 
                 { value: '3', text: '(행동) 좋아하는 음식을 사오거나 선물을 건네는 편이다.', tag: '#외향성', followup: { text: '받지 않으면?', options: [{ value: '1', text: '서운하다' }, { value: '2', text: '화난다' }, { value: '3', text: '다음 기회에' }] } }, 
                 { value: '4', text: '(대기) 상대방 기분이 풀릴 때까지 조용히 기다리는 편이다.', tag: '#애착회피', followup: { text: '너무 오래 걸리면?', options: [{ value: '1', text: '먼저 연락한다' }, { value: '2', text: '계속 기다린다' }, { value: '3', text: '지친다' }] } } 
             ]},
-            // 15. 사과
             { id: 'q_apology', section: 'Limbic', category: '갈등 회복', type: 'similarity', text: '진정한 사과라고 느끼는 것은?', options: [ 
                 { value: '1', text: '(언어) 진심이 담긴 사과의 말과 눈빛이 중요하다.', tag: '#우호성'}, 
                 { value: '2', text: '(행동) 앞으로의 다짐과 구체적인 행동 변화를 보여주는 것이다.', tag: '#성실성'}, 
                 { value: '3', text: '(수용) 내 입장을 끝까지 들어주고 공감해주는 태도이다.', tag: '#애착안정'}, 
                 { value: '4', text: '(보상) 기분 전환을 위한 선물이나 맛있는 음식으로 풀어주는 것이다.', tag: '#외향성'} 
             ]},
-            // 16. 언쟁
             { id: 'q_argument', section: 'Limbic', category: '대화 방식', type: 'similarity', text: '논쟁 중 상대가 말실수를 했다면?', options: [ 
                 { value: '1', text: '(지적) 잘못된 부분을 짚어주며 논리적으로 반박하는 편이다.', tag: '#성실성'}, 
                 { value: '2', text: '(질문) 상대방의 의도가 무엇인지 차분하게 물어보는 편이다.', tag: '#애착안정'}, 
                 { value: '3', text: '(유머) 농담으로 가볍게 넘기며 경직된 분위기를 푼다.', tag: '#외향성'}, 
                 { value: '4', text: '(상처) 마음에 상처를 입고 입을 다물게 된다.', tag: '#애착불안'} 
             ]},
-            // 17. 인내
             { id: 'q_dealbreaker', section: 'Limbic', category: '관계 가치관', type: 'preference', text: '도저히 참을 수 없는 이별 사유는?', options: [ 
                 { value: '1', text: '(신뢰) 거짓말이나 외도 등 신뢰를 깨뜨리는 행동이다.', tag: '#애착안정'}, 
                 { value: '2', text: '(존중) 욕설이나 비하 등 존중하지 않는 태도와 폭력성이다.', tag: '#우호성'}, 
@@ -1209,29 +1157,8 @@
                 { value: '4', text: '(해외) 낯선 해외에서 살아보거나 이민을 가고 싶다.', tag: '#개방성'} 
             ]}
         ];
-
-        // [NEW] Synergy Map for detailed analysis benefits
-        const synergyMap = {
-            'q_sleep': {
-                '1': "예민한 감각을 공유하며 서로에게 가장 아늑하고 조용한 침실 환경을 만들어 줄 수 있습니다.",
-                '2': "무난한 수면 패턴 덕분에 여행이나 일상에서 수면 문제로 다툴 일이 거의 없습니다.",
-                '3': "변화에 유연하게 대처할 수 있어 어디서든 함께 꿀잠을 잘 수 있는 환상의 짝꿍입니다.",
-                '4': "둘 다 머리만 대면 잠드는 복받은 타입! 불면증 걱정 없는 편안한 밤을 보낼 수 있습니다."
-            },
-            'q_food': {
-                '1': "호기심 넘치는 미식 탐험가 커플! 함께 새로운 맛집을 도장 깨기 하며 즐거운 추억을 쌓을 수 있습니다.",
-                '3': "편식 없이 무엇이든 잘 먹는 두 분은 메뉴 선정 스트레스 없이 행복한 식사 시간을 가질 수 있습니다."
-            },
-            'q_contact_style': {
-                '4': "서로의 사생활을 존중하며, 연락의 의무감보다는 편안한 신뢰를 바탕으로 관계를 유지합니다."
-            },
-            'q_finance': {
-                '2': "안전을 최우선으로 하는 두 분은 리스크 없는 탄탄한 자산 관리를 통해 안정적인 미래를 설계합니다."
-            }
-            // ... 필요한 만큼 추가 가능 (Fallback은 일반적인 긍정 멘트로 처리)
-        };
-
-        // ... (tagToAxis, traitColors, profileDescriptions, traitText, maleContainer, femaleContainer, renderQuestions, createQuestionHTML, handleDynamic, randomBtn, calculateBtn logic remains same) ...
+        
+        // ... (tagToAxis, traitColors, profileDescriptions, traitText, maleContainer, femaleContainer 등 기존 변수 유지) ...
         const tagToAxis = {
             '#개방성': '개방성', '#탐구형': '개방성', '#미식': '개방성', '#감각추구': '개방성', '#비전지향': '개방성', '#분리': '개방성', '#위험감수': '개방성', '#효율성': '개방성', '#독립적': '애착회피',
             '#성실성': '성실성', '#규칙준수': '성실성', '#높은성실성': '성실성', '#계획성': '성실성', '#현실적': '성실성', '#능력': '성실성', '#실물자산': '성실성', '#양육집중': '성실성', '#자산가치': '성실성', '#합리적': '성실성', '#성취': '성실성', '#실용주의': '성실성',
@@ -1249,6 +1176,30 @@
             '애착불안': ['#EF4444', '#FEE2E2'], '애착회피': ['#64748B', '#F1F5F9'] 
         };
         
+        // [NEW] 성향별 점수 기반 동적 설명 (High/Mid 구분)
+        const traitLevelDescriptions = {
+            '개방성': {
+                high: "호기심과 창의력이 매우 뛰어난 혁신가입니다. 새로운 경험을 두려워하지 않고 즐깁니다.",
+                mid: "새로운 경험을 즐기면서도 현실 감각을 유지하는 유연한 사고의 소유자입니다."
+            },
+            '성실성': {
+                high: "철저한 계획과 책임감으로 목표를 반드시 이뤄내는 완벽주의 성향이 있습니다.",
+                mid: "맡은 일에 최선을 다하며 신뢰를 주는 든든한 파트너입니다."
+            },
+            '외향성': {
+                high: "어디서든 주인공이 되는 폭발적인 에너지의 소유자입니다. 사람들과 어울리는 것을 사랑합니다.",
+                mid: "적당한 사교성을 갖추었으며, 긍정적인 에너지로 주변을 밝게 만듭니다."
+            },
+            '우호성': {
+                high: "바다 같은 넓은 마음으로 타인을 감싸주는 진정한 평화주의자입니다.",
+                mid: "타인의 감정에 공감하고 배려할 줄 아는 따뜻한 마음씨를 가졌습니다."
+            },
+            '정서안정': {
+                high: "어떤 시련에도 흔들리지 않는 강철 멘탈의 소유자입니다.",
+                mid: "감정 기복이 적고 차분하게 상황을 대처하는 안정적인 사람입니다."
+            }
+        };
+
         const profileDescriptions = {
             '개방성': "새로운 경험에 열려있고 창의적이며, 호기심이 많은 타입입니다.",
             '성실성': "목표 지향적이고 계획적이며, 책임감이 강한 신뢰의 아이콘입니다.",
@@ -1417,7 +1368,7 @@
                             if (m.value === f.value) { 
                                 isMatch = true; 
                                 // Add questionType info (similarity, preference, dynamic etc)
-                                details.exactMatches.push({ matchType: 'similarity', questionType: q.type, id: q.id, value: m.value, category: q.category, q: q.text, a: m.dataset.text }); 
+                                details.exactMatches.push({ matchType: 'similarity', questionType: q.type, category: q.category, q: q.text, a: m.dataset.text }); 
                                 point = 1; 
                             } else { 
                                 details.diffMatches.push({ q: q.text, ma: m.dataset.text, fa: f.dataset.text }); 
@@ -1428,7 +1379,7 @@
                             const fp = document.querySelector(`input[name="${q.id}-partner-female"]:checked`);
                             if (mp.value === f.value && fp.value === m.value) { 
                                 isMatch = true; 
-                                details.exactMatches.push({ matchType: 'crossover', questionType: q.type, id: q.id, value: m.value, category: q.category, q: q.text_me.replace('?', ''), a: "서로가 원하는 바를 완벽하게 충족함" }); 
+                                details.exactMatches.push({ matchType: 'crossover', questionType: q.type, category: q.category, q: q.text_me.replace('?', ''), a: "서로가 원하는 바를 완벽하게 충족함" }); 
                                 point = 1; 
                             } else { 
                                 details.diffMatches.push({ q: q.text_me, ma: `남자는 '${mp.dataset.text}'를 원함 vs 여자는 '${fp.dataset.text}'를 원함`, fa: "" }); 
@@ -1460,7 +1411,6 @@
             });
         }
 
-        // ... (Previous Helper Functions: getMatchType, getDominantColor, drawResonanceWave, getTextRating, renderSolution) ...
         function getMatchType(score, maleAxes, femaleAxes) {
             const axesKeys = ['개방성', '성실성', '외향성', '우호성', '정서안정', '애착안정', '애착불안', '애착회피'];
             const getDom = (axes) => Object.keys(axes).reduce((a, b) => axes[a] > axes[b] ? a : b);
@@ -1617,49 +1567,80 @@
             let chemistry = getChemistryInsight(mDom, fDom);
             return { maleResult, femaleResult, chemistry };
         }
+        // [MODIFIED] renderPersonalAnalysis with Dynamic Descriptions based on Score
         function renderPersonalAnalysis(gender, axes, attachCount) {
-            // ... (same as previous)
             const big5 = [
-                { id: '개방성', val: axes['개방성'], label: '✨ 창의적인 탐험가 (개방성)', desc: '새로운 경험을 즐기고 열린 사고를 가졌습니다.' },
-                { id: '성실성', val: axes['성실성'], label: '📅 든든한 계획가 (성실성)', desc: '목표를 향해 꾸준히 나아가는 책임감이 돋보입니다.' },
-                { id: '외향성', val: axes['외향성'], label: '🎉 분위기 메이커 (외향성)', desc: '긍정적인 에너지로 주변을 밝게 만듭니다.' },
-                { id: '우호성', val: axes['우호성'], label: '🤝 다정한 평화주의자 (우호성)', desc: '타인을 배려하고 공감하는 따뜻한 마음씨를 가졌습니다.' },
-                { id: '정서안정', val: axes['정서안정'], label: '🧘 흔들리지 않는 바위 (정서안정)', desc: '어떤 상황에서도 침착함을 잃지 않는 내면이 강한 분입니다.' }
+                { id: '개방성', val: axes['개방성'] },
+                { id: '성실성', val: axes['성실성'] },
+                { id: '외향성', val: axes['외향성'] },
+                { id: '우호성', val: axes['우호성'] },
+                { id: '정서안정', val: axes['정서안정'] }
             ];
+            
             big5.sort((a, b) => b.val - a.val);
             const top3 = big5.slice(0, 3);
+
             let top3HTML = '<div class="space-y-2 mb-5">';
             top3HTML += '<h4 class="font-bold text-sm text-gray-500 mb-2">🏆 나의 핵심 매력 TOP 3</h4>';
+            
             top3.forEach((item, index) => {
+                // Determine description based on score (Assuming score > 3 is 'High', else 'Mid' for context of this quiz)
+                // Since max score per trait varies but roughly 4-5 is high. 
+                const isHigh = item.val >= 4; 
+                const descText = isHigh ? traitLevelDescriptions[item.id].high : traitLevelDescriptions[item.id].mid;
+                
                 top3HTML += `
-                    <div class="flex items-center p-2 bg-white rounded-lg border border-${gender === 'male' ? 'blue' : 'pink'}-50 shadow-sm">
-                        <span class="font-bold text-${gender === 'male' ? 'blue' : 'pink'}-600 mr-2 w-6 text-center">${index + 1}</span>
+                    <div class="flex items-center p-3 bg-white rounded-lg border border-${gender === 'male' ? 'blue' : 'pink'}-50 shadow-sm">
+                        <span class="font-bold text-${gender === 'male' ? 'blue' : 'pink'}-600 mr-3 w-6 text-center text-lg">${index + 1}</span>
                         <div>
-                            <div class="font-bold text-sm text-gray-800">${item.label}</div>
-                            <div class="text-xs text-gray-500">${item.desc}</div>
+                            <div class="font-bold text-sm text-gray-800 mb-1">
+                                ${item.id} 
+                                <span class="text-[10px] text-gray-400 font-normal ml-1">(${isHigh ? 'Very High' : 'Moderate'})</span>
+                            </div>
+                            <div class="text-xs text-gray-600 leading-snug">${descText}</div>
                         </div>
                     </div>`;
             });
             top3HTML += '</div>';
+
+            // Determine Attachment Style
             let attachKey = '애착안정';
             if (axes['애착회피'] > axes['애착불안'] && axes['애착회피'] >= axes['애착안정']) attachKey = '애착회피';
             else if (axes['애착불안'] > axes['애착회피'] && axes['애착불안'] >= axes['애착안정']) attachKey = '애착불안';
+            
+            // [MODIFIED] Positive Re-framing for Attachment Styles
             const attachInfo = {
-                '애착안정': { title: '든든한 신뢰형 (Secure)', desc: '상대방을 깊이 신뢰하며, 갈등 상황에서도 대화를 통해 지혜롭게 해결합니다. 편안한 연애의 고수입니다.', color: 'bg-green-50 text-green-800 border-green-100' },
-                '애착불안': { title: '섬세한 감성형 (Sensitive)', desc: '사랑에 대한 열정이 뜨겁고 상대방의 감정을 세심하게 파악합니다. 깊은 유대감을 나눌 준비가 되어 있습니다.', color: 'bg-orange-50 text-orange-800 border-orange-100' }, 
-                '애착회피': { title: '독립적 조화형 (Independent)', desc: '서로의 사생활을 존중하며, 건강한 거리두기를 통해 관계를 오래 지속하는 힘이 있습니다.', color: 'bg-purple-50 text-purple-800 border-purple-100' } 
+                '애착안정': { 
+                    title: '단단한 신뢰형 (Secure)', 
+                    desc: '상대방을 깊이 신뢰하며, 갈등 상황에서도 대화를 통해 지혜롭게 해결합니다. 편안한 관계를 이끄는 힘이 있습니다.', 
+                    color: 'bg-green-50 text-green-800 border-green-100' 
+                },
+                '애착불안': { 
+                    title: '섬세한 감성형 (Sensitive)', // Renamed from Anxious
+                    desc: '사랑에 대한 열정이 뜨겁고 상대방의 감정 변화를 세심하게 알아차립니다. 깊은 정서적 유대감을 나눌 수 있는 따뜻한 분입니다.', 
+                    color: 'bg-orange-50 text-orange-800 border-orange-100' 
+                }, 
+                '애착회피': { 
+                    title: '독립적 조화형 (Independent)', // Renamed from Avoidant
+                    desc: '서로의 사생활을 존중하며, 건강한 거리두기를 통해 관계를 오래 지속하는 힘이 있습니다. 신중하게 마음을 여는 진중한 타입입니다.', 
+                    color: 'bg-purple-50 text-purple-800 border-purple-100' 
+                } 
             };
+
             const myAttach = attachInfo[attachKey];
+
             const attachHTML = `
-                <div class="p-4 rounded-xl border ${myAttach.color} relative overflow-hidden">
-                    <div class="font-bold text-sm mb-1 flex items-center gap-2">
+                <div class="p-4 rounded-xl border ${myAttach.color} relative overflow-hidden mt-4">
+                    <div class="font-bold text-sm mb-2 flex items-center gap-2">
                         <span>🛡️ 애착 성향: ${myAttach.title}</span>
                     </div>
-                    <p class="text-xs leading-relaxed opacity-90">${myAttach.desc}</p>
+                    <p class="text-xs leading-relaxed opacity-90 font-medium">${myAttach.desc}</p>
                 </div>
             `;
+
             return { statHTML: top3HTML, analysisHTML: attachHTML, attachType: myAttach.title.split(' ')[0], attachBadgeClass: '' };
         }
+
         function getChemistryInsight(mTrait, fTrait) {
             // ... (kept existing logic)
              let title = "서로 다른 매력의 조화";
@@ -1929,33 +1910,16 @@
                     // fallback for undefined questionType (e.g. from legacy logic if any)
                     const qType = item.questionType || 'similarity'; 
                     const info = matchTypeInfo[qType] || matchTypeInfo['similarity'];
-                    const matchKey = `${item.id}_${item.value}`;
-                    // Use map or fallback text
-                    const analysisText = synergyMap[item.id] && synergyMap[item.id][item.value] 
-                        ? synergyMap[item.id][item.value] 
-                        : "두 분의 성향이 완벽하게 일치하여 긍정적인 시너지를 냅니다.";
 
                     const div = document.createElement('div');
                     div.className = `match-card ${info.class}`;
                     div.innerHTML = `
-                        <div class="match-header-row">
+                        <div class="match-card-header">
                             <span class="match-badge">${info.label}</span>
-                            <span class="match-category">${item.category || ''}</span>
+                            <span class="text-xs text-gray-400 font-medium ml-auto">${item.category || ''}</span>
                         </div>
-                        <div class="match-question">Q. ${item.q.replace('?', '')}</div>
-                        
-                        <div class="match-answer-box">
-                            <div class="couple-icon">🤵‍♂️🤝👰‍♀️</div>
-                            <div class="answer-text">
-                                <span class="answer-label">두 분 모두 이 답변을 선택했습니다!</span>
-                                "${item.a}"
-                            </div>
-                        </div>
-                        
-                        <div class="match-analysis">
-                            <span class="analysis-icon">💡</span>
-                            <span>${analysisText}</span>
-                        </div>
+                        <div class="match-card-q">Q. ${item.q.replace('?', '')}</div>
+                        <div class="match-card-a">${item.a}</div>
                     `;
                     integratedList.appendChild(div);
                 });
